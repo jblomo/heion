@@ -1,0 +1,3 @@
+config:
+  template: Hello, %s!
+  defaultName: Stranger
