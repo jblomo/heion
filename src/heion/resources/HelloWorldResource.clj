@@ -10,7 +10,7 @@
            [java.util.concurrent.atomic AtomicLong])
 
   (:gen-class :name ^{javax.ws.rs.Path "/hello-world"
-                      javax.ws.rs.Produces "application/json" #_javax.ws.rs.core.MediaType/APPLICATION_JSON}
+                      javax.ws.rs.Produces ["application/json"] #_javax.ws.rs.core.MediaType/APPLICATION_JSON}
               heion.resources.HelloWorldResource
               :state state
               :init init

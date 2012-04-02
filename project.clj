@@ -4,4 +4,5 @@
                  [com.yammer.dropwizard/dropwizard-core "0.3.1"]]
   ;:java-source-path "src/main/java"
   ; specify ordering
-  :aot [#"heion.resources.*" #"heion.*"])
+  :aot [#"heion.resources.*" #"heion.*"]
+  :main heion.HelloWorldService)

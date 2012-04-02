@@ -1,6 +1,8 @@
 (ns heion.core.Saying
   (:gen-class :state state
               :init init
+              :methods [[getId [] String]
+                        [getContent [] String]]
               :constructors {[long String] []}))
 
 (defn -init

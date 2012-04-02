@@ -16,13 +16,14 @@
 (defn -main
   "Start HelloWorld Service"
   [& args]
-  (.run (heion.HelloWorldService.) args))
+  (.run (heion.HelloWorldService.) (into-array args)))
 
 (defn -initialize
   "Override default service initialization"
   [this configuration environment]
+  (println "Adding to env " (.getTemplate configuration) (.getDefaultName configuration) (.config configuration))
   (doto environment
     (.addResource (HelloWorldResource.
-                    (.get-template configuration)
-                    (.get-default-name configuration)))
-    (.addHealthCheck (TemplateHealthCheck. (.get-template configuration)))))
+                    (.getTemplate configuration)
+                    (.getDefaultName configuration)))
+    (.addHealthCheck (TemplateHealthCheck. (.getTemplate configuration)))))

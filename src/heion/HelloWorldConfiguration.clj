@@ -2,21 +2,25 @@
   (:import [org.codehaus.jackson.annotate JsonProperty]
            [org.hibernate.validator.constraints NotEmpty])
   (:gen-class :extends com.yammer.dropwizard.config.Configuration
-              :state ^{JsonProperty () NotEmpty ()} config
+              :state ^{JsonProperty {} NotEmpty {}} config
+              :methods [[getTemplate [] String]
+                        [getDefaultName [] String]]
               :init init))
               ;:state config))
 
 (defn -init
   "Initialize config map"
   [& const]
-  [const (atom {})])
+  ; TODO currently string keys from YAML
+  [const {"template" "In code Hello, %s!"
+          "defaultName" "In code Stranger"}])
 
-(defn -get-template
+(defn -getTemplate
   "Return the template string"
   [this]
-  (:template @(.config this)))
+  (get (.config this) "template"))
 
-(defn -get-default-name
+(defn -getDefaultName
   "Return the default name to greet"
   [this]
-  (:default-name @(.config this)))
+  (get (.config this) "defaultName"))
