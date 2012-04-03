@@ -12,7 +12,7 @@
 (defn -check
   "Return a healthy response or throw an exception"
   [this]
-  (let [saying (String/format (.template this) "TEST")]
+  (let [saying (format (.template this) "TEST")]
     (if (.contains saying "TEST")
       (HealthCheck$Result/healthy)
       (HealthCheck$Result/unhealthy "template doesn't inclde a name"))))

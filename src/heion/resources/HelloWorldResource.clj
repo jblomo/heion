@@ -1,6 +1,5 @@
 (ns heion.resources.HelloWorldResource
-  (:import [heion.core Saying]
-           [com.google.common.base Optional]
+  (:import [com.google.common.base Optional]
            [com.yammer.metrics.annotation Timed]
            [javax.ws.rs GET]
            [javax.ws.rs Path]
@@ -8,7 +7,6 @@
            [javax.ws.rs QueryParam]
            [javax.ws.rs.core MediaType]
            [java.util.concurrent.atomic AtomicLong])
-
   (:gen-class :name ^{javax.ws.rs.Path "/hello-world"
                       javax.ws.rs.Produces ["application/json"] #_javax.ws.rs.core.MediaType/APPLICATION_JSON}
               heion.resources.HelloWorldResource
@@ -17,7 +15,8 @@
               :constructors {[String String] []}
               :methods [[^{javax.ws.rs.GET {} com.yammer.metrics.annotation.Timed {}} sayHello
                          [^{javax.ws.rs.QueryParam "name" :parameters String} com.google.common.base.Optional]
-                         heion.core.Saying]]))
+                         
+                         java.util.Map]]))
 
 (defn -init
   [template default-name]
@@ -25,6 +24,6 @@
 
 (defn -sayHello
   [this name]
-  (Saying. (.incrementAndGet (:counter (.state this)))
-           (String/format (:template (.state this))
-                          (.or name (:default-name (.state this))))))
+  {:id (.incrementAndGet (:counter (.state this)))
+   :content (format (:template (.state this))
+                   (.or name (:default-name (.state this))))})
